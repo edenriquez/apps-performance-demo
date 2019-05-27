@@ -1,0 +1,14 @@
+version: "3.2"
+services:
+  apache:
+    image: nimmis/apache-php7
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+  mysql:
+    image: mysql:5.6.40
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
