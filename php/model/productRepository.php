@@ -5,7 +5,7 @@ class Repository
     private $_price;
     private $_sku;
     private $_image;
-    function __construct($request) {
+    function __construct($request = null) {
       $productData = json_decode($request);
       $this->_name  =$productData->name;
       $this->_price =$productData->price;
@@ -16,92 +16,70 @@ class Repository
     public function create($con){
         $query= $this->buildQuery();
         if(mysqli_query($con, $query)) {
-            $messgae = "Product created Successfully.";
+            $message = "Product created Successfully.";
             $status = 200;			
         } else {
-            $messgae = "Product creation failed.";
+            $message = "Product creation failed.";
             $status = 401;			
         }
-        $empResponse = array(
+        $productResponse = array(
             'status' => $status,
-            'status_message' => $messgae
+            'status_message' => $message
         );
         header('Content-Type: application/json');
-        echo json_encode($empResponse);
+        echo json_encode($productResponse, JSON_PRETTY_PRINT);
     }
 
-    public function deleteEmployee($empId) {		
-        if($empId) {			
-            $empQuery = "
-                DELETE FROM ".$this->empTable." 
-                WHERE id = '".$empId."'	ORDER BY id DESC";	
-            if( mysqli_query($this->dbConnect, $empQuery)) {
-                $messgae = "Employee delete Successfully.";
+    public function getAll($con){
+        $query = $this->buildGetAllQuery();
+        
+        $result = mysqli_query($con, $query);
+        $response = array();
+
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
+          array_push($response, array(
+            "id" => $row["id"],
+            "name" =>$row["name"],
+            "price" => $row["price"],
+            "sku" => $row["sku"],
+            "image" => $row["image"]
+          ));
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response,JSON_PRETTY_PRINT);
+    }
+
+    public function delete($con, $productId) {
+      if($productId) {
+        $deleteQuery = $this->buildDeleteQuery($productId);
+            if( mysqli_query($con, $deleteQuery)) {
+                $message = "Employee delete Successfully.";
                 $status = 1;			
             } else {
-                $messgae = "Employee delete failed.";
+                $message = "Employee delete failed.";
                 $status = 0;			
             }		
         } else {
-            $messgae = "Invalid request.";
+            $message = "Invalid request.";
             $status = 0;
         }
         $empResponse = array(
             'status' => $status,
-            'status_message' => $messgae
+            'status_message' => $message
         );
         header('Content-Type: application/json');
-        echo json_encode($empResponse);	
+        echo json_encode($empResponse, JSON_PRETTY_PRINT);	
     }
-    
-    function updateEmployee($empData){ 		
-        if($empData["id"]) {
-            $empName=$empData["empName"];
-            $empAge=$empData["empAge"];
-            $empSkills=$empData["empSkills"];
-            $empAddress=$empData["empAddress"];		
-            $empDesignation=$empData["empDesignation"];
-            $empQuery="
-                UPDATE ".$this->empTable." 
-                SET name='".$empName."', age='".$empAge."', skills='".$empSkills."', address='".$empAddress."', designation='".$empDesignation."' 
-                WHERE id = '".$empData["id"]."'";
-                echo $empQuery;
-            if( mysqli_query($this->dbConnect, $empQuery)) {
-                $messgae = "Employee updated successfully.";
-                $status = 1;			
-            } else {
-                $messgae = "Employee update failed.";
-                $status = 0;			
-            }
-        } else {
-            $messgae = "Invalid request.";
-            $status = 0;
-        }
-        $empResponse = array(
-            'status' => $status,
-            'status_message' => $messgae
-        );
-        header('Content-Type: application/json');
-        echo json_encode($empResponse);
+
+    private function buildGetAllQuery(){
+    return "SELECT * FROM {$_ENV['DATABASE']};";
     }
-    
-    public function getEmployee($empId) {		
-        $sqlQuery = '';
-        if($empId) {
-            $sqlQuery = "WHERE id = '".$empId."'";
-        }	
-        $empQuery = "
-            SELECT id, name, skills, address, age 
-            FROM ".$this->empTable." $sqlQuery
-            ORDER BY id DESC";	
-        $resultData = mysqli_query($this->dbConnect, $empQuery);
-        $empData = array();
-        while( $empRecord = mysqli_fetch_assoc($resultData) ) {
-            $empData[] = $empRecord;
-        }
-        header('Content-Type: application/json');
-        echo json_encode($empData);	
-    }    
+
+    private function buildDeleteQuery($id){
+        return "DELETE FROM {$_ENV['DATABASE']}
+                WHERE id = {$id} ORDER BY id DESC";	
+    }
+
     private function buildQuery(){
     return "INSERT INTO 
     {$_ENV['DATABASE']}
