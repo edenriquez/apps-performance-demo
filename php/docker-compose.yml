@@ -6,6 +6,7 @@ services:
       - mysql
     ports:
       - "80:80"
+      - "19991:19999"
     volumes:
       - ./:/var/www/html
   mysql:
