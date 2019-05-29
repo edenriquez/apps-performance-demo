@@ -6,7 +6,7 @@ services:
       - mysql
     working_dir: "/usr/app/"
     ports:
-      - "80:80"
+      - "3000:3000"
       - "19991:19999"
     volumes:
       - .:/usr/app/
