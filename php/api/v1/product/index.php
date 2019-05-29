@@ -1,8 +1,8 @@
 <?php 
 
-include("../../../model/connection.php");
+include("../../../model/product/connection.php");
 include("../../../env.php");
-include('../../../model/productRepository.php');
+include('../../../model/product/productRepository.php');
 include('../errors/index.php');
 
 $errors = new ApiErrors();
