@@ -7,12 +7,14 @@ services:
     working_dir: "/usr/app/"
     ports:
       - "3000:3000"
-      - "19991:19999"
+      - "19992:19999"
     volumes:
       - .:/usr/app/
       - ./node_modules:/usr/app/node_modules
     command: "npm start"
   mysql:
     image: mysql:5.6.40
+    ports:
+      - "3307:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword

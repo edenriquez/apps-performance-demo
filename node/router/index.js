@@ -40,6 +40,7 @@ exports.serverRouter = (req, res) => {
          }
       ));
    }else if(url.indexOf('delete') != -1){
+      
       id = url.slice(23)
       if (isNaN(parseInt(id))){
          res.writeHead(...setHeader(401)); 
