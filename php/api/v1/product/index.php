@@ -1,5 +1,5 @@
 <?php 
-
+// ROUTE: /api/v1/product
 include("../../../model/product/connection.php");
 include("../../../env.php");
 include('../../../model/product/productRepository.php');
