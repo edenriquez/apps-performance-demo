@@ -1,0 +1,14 @@
+{% for container in inactive_containers %}
+<div class="column is-4">
+    <article class="message is-dark">
+        <div class="message-header message-header-gray">
+            <p>{{container.name}}</p>
+        </div>
+        <div class="message-body message-gray buttons is-centered">
+            <a data-id={{container.id}} class="button is-success is-outlined turn-on is-inverted"">
+                turn on
+            </a>
+        </div>
+    </article>
+</div>
+{% endfor %}
