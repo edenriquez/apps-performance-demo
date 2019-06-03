@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.0.4/notyf.min.css">
+  <link href="{{ url_for('static', filename='css/bulma.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/site.css') }}" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/notyf@3.0.4/notyf.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <div class="content container">
+    <div class="header">
+      <h1 class="title main-title">Dashboard</h1>
+    </div>
+    <div class="columns ">
+      <div class="column">
+        <h1 class="border-box">Recently turned on</h1>
+        <div class="columns is-narrow is-multiline">
+          {% include 'recently.html' %}
+        </div>
+      </div>
+      <div class="column">
+        <h1 class="border-box">Active containers</h1>
+        <div class="columns is-narrow is-multiline">
+          {% include 'containers.html' %}
+        </div>
+      </div>
+    </div>
+    <h1 class="border-box">
+      Benchmarks
+    </h1>
+    <div class="columns benchmarks">
+      <div class="column">
+        <p class="subtitle">Concurrent Requests</p>
+
+      </div>
+      <div class="column">
+        <p class="subtitle">Number of requests</p>
+
+      </div>
+      <div class="column">
+        <p class="subtitle">Payload</p>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    var notyf = new Notyf();
+  </script>
+</body>
+
+</html>

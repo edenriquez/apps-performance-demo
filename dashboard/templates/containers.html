@@ -1,0 +1,14 @@
+{% for container in containers %}
+<div class="column is-4">
+    <article class="message is-dark">
+        <div class="message-header">
+            <p>{{container.name}}</p>
+        </div>
+        <div class="message-body buttons is-centered">
+            <a data-id={{container.id}} class="button is-success is-outlined turn-off is-inverted"">
+                turn off
+            </a>
+        </div>
+    </article>
+</div>
+{% endfor %}

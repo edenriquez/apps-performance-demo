@@ -1,0 +1,66 @@
+html {
+    background: #1b232e;
+    height: 100vh;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.container {
+    padding: 10px;
+}
+
+.content .main-title {
+    text-align: center;
+    color: #f1f1f1;
+}
+
+.message-body {
+    background: #36f0a6;
+}
+
+.message-body p,
+.message-body a {
+    text-transform: uppercase;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+.border-box {
+    border: 3px solid #f1f1f1;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 15px !important;
+    color: #f1f1f1 !important;
+    text-align: center;
+}
+
+.benchmarks p {
+    color: #f1f1f1;
+    text-align: center;
+}
+
+.message-gray {
+    background: #cbcbcb;
+}
+
+.message-header-gray {
+    background: #736e6e !important;
+}
+
+.message-header p {
+    color: #e6dada;
+}
+
+.health-status {
+    font-size: 30px;
+    text-align: center;
+}
+
+/* overwrite css notify */
+.notyf__toast {
+    background: #ed3d3d;
+    width: auto;
+    max-width: 1000px;
+}
